@@ -9,6 +9,7 @@ public class MainCharacter : MonoBehaviour {
 
     private bool isDead = false; // Collision death
     private Rigidbody2D rb2d;
+    private bool isTouchingGround;
 
     // Start is called before the first frame update
     void Start() {
@@ -18,7 +19,7 @@ public class MainCharacter : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (isDead == false) {
-            if (Input.GetKeyDown("space")) {
+            if (Input.GetKeyDown("space") && isTouchingGround == true) {
                 rb2d.AddForce(new Vector2(0, jumpForce));
             } else if (Input.GetKey("right")) {
                 transform.Translate(movementSpeed * Time.deltaTime, 0, 0);
@@ -26,5 +27,13 @@ public class MainCharacter : MonoBehaviour {
                 transform.Translate(-movementSpeed * Time.deltaTime,0 ,0);
             }
         }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision) {
+        isTouchingGround = true;
+    }
+
+    public void OnCollisionExit2D(Collision2D collision) {
+        isTouchingGround = false;
     }
 }
