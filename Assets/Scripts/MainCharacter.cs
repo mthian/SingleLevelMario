@@ -30,7 +30,9 @@ public class MainCharacter : MonoBehaviour {
     }
 
     public void OnCollisionEnter2D(Collision2D collision) {
-        isTouchingGround = true;
+        if (collision.gameObject.tag == "Ground") {
+            isTouchingGround = true;
+        }
     }
 
     public void OnCollisionExit2D(Collision2D collision) {

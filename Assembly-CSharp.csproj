@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Camera.cs" />
     <Compile Include="Assets\Scripts\MainCharacter.cs" />
     <None Include="Assets\Downloads\Pixel Adventure 2\README.txt" />
     <None Include="Assets\Sprites\Instructions\README.txt" />
