@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class MainCharacter : MonoBehaviour {
 
-    public float jumpForce = 500f;
+    public float jumpForce = 600f;
     public float movementSpeed = 5;
+    public GameObject[] lifePoints = new GameObject[3];
+    public int health = 3;
 
     private bool isDead = false; // Collision death
     private Rigidbody2D rb2d;
     private bool isTouchingGround;
+    private bool damageTaken = false;
+    private float immunityTimer = 2f;
 
     // Start is called before the first frame update
     void Start() {
@@ -20,18 +24,35 @@ public class MainCharacter : MonoBehaviour {
     void Update() {
         if (isDead == false) {
             if (Input.GetKeyDown("space") && isTouchingGround == true) {
-                rb2d.AddForce(new Vector2(0, jumpForce));
+                rb2d.AddForce(new Vector2(0, jumpForce)); 
             } else if (Input.GetKey("right")) {
                 transform.Translate(movementSpeed * Time.deltaTime, 0, 0);
             } else if (Input.GetKey("left")) {
                 transform.Translate(-movementSpeed * Time.deltaTime,0 ,0);
             }
         }
+        if (damageTaken == true) {
+            immunityTimer -= Time.deltaTime;
+            if (immunityTimer == 0) {
+                damageTaken = false;
+                immunityTimer = 2f;
+            }
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Ground") {
-            isTouchingGround = true;
+        for (int i = 0; i < collision.contactCount; i++) {
+            if (collision.gameObject.tag == "Ground") {
+                isTouchingGround = true;
+            } else if (collision.gameObject.tag == "Enemy") {
+                if (collision.GetContact(i).normal.y > 0) {
+                    rb2d.AddForce(new Vector2(0, jumpForce / 2));
+                } else {
+                    damageTaken = true;
+                    health--;
+                    Debug.Log(health);
+                }
+            }
         }
     }
 
