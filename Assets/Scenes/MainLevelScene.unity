@@ -794,6 +794,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instructions: {fileID: 1727495341}
+  mainCharScript: {fileID: 1858404164}
+  heart0: {fileID: 634646003}
+  heart1: {fileID: 1985364775}
+  heart2: {fileID: 2136333675}
 --- !u!4 &912443306
 Transform:
   m_ObjectHideFlags: 0
@@ -1541,7 +1545,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589040944}
   m_LocalRotation: {x: -0.023730658, y: -0, z: -0, w: 0.9997184}
-  m_LocalPosition: {x: 9.87, y: -0.86, z: 0}
+  m_LocalPosition: {x: 9.87, y: 0.14, z: 0}
   m_LocalScale: {x: 0.27, y: 0.13, z: 1}
   m_Children: []
   m_Father: {fileID: 1512917588}
@@ -1893,6 +1897,7 @@ MonoBehaviour:
   - {fileID: 634646003}
   - {fileID: 1985364775}
   - {fileID: 2136333675}
+  health: 3
 --- !u!1 &1965466665
 GameObject:
   m_ObjectHideFlags: 0

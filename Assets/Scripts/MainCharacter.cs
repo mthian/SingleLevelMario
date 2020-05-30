@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,8 +33,9 @@ public class MainCharacter : MonoBehaviour {
             }
         }
         if (damageTaken == true) {
+            Debug.Log(immunityTimer);
             immunityTimer -= Time.deltaTime;
-            if (immunityTimer == 0) {
+            if (immunityTimer <= 0) {
                 damageTaken = false;
                 immunityTimer = 2f;
             }
@@ -47,7 +49,8 @@ public class MainCharacter : MonoBehaviour {
             } else if (collision.gameObject.tag == "Enemy") {
                 if (collision.GetContact(i).normal.y > 0) {
                     rb2d.AddForce(new Vector2(0, jumpForce / 2));
-                } else {
+                } else if (damageTaken == false) {
+                    Debug.Log(collision.gameObject.tag);
                     damageTaken = true;
                     health--;
                     Debug.Log(health);
